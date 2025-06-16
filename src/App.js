@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProjectPage from "./pages/ProjectPage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <h1>Task Manager</h1>
         <Routes>
           <Route path="/" element={<ProjectPage />} />
-          {/* 今後ここに他ページも追加できる */}
+          <Route path="/projects/:id" element={<ProjectDetailPage />} />
         </Routes>
       </div>
     </Router>

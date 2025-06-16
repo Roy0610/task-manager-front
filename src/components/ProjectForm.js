@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const ProjectForm = ({ onProjectCreated }) => {
+const ProjectForm = ({ onProjectCreated }: ProjectFormProps) => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
@@ -19,7 +19,11 @@ const ProjectForm = ({ onProjectCreated }) => {
       if (onProjectCreated) onProjectCreated(response.data);
     } catch (err) {
       console.error("作成エラー:", err);
-      setError("作成に失敗しました");
+      if (err.response?.data?.message) {
+        setError(`作成に失敗しました: ${err.response.data.message}`);
+      } else {
+        setError("サーバーエラーが発生しました。しばらくしてから再試行してください。");
+      }
     }
   };
 
